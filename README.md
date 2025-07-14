@@ -1,122 +1,113 @@
-# Adaptive Ensemble Feature Selection and Genetic Algorithm-Tuned Ensemble Model for Robust Heart Disease Prediction
+# 🫀 Adaptive Ensemble Feature Selection and Genetic Algorithm-Tuned Ensemble Model for Robust Heart Disease Prediction
 
-## Methodology
+## 🧪 Methodology
 
-### Step 1: Dataset Collection & Integration
+---
 
-**1.1 Select Global Datasets**
+### 📊 Step 1: Dataset Collection & Integration
 
+#### 1.1 Select Global Datasets
 - **Sources:**
-  - UCI: Cleveland, Statlog, Hungarian, Long Beach VA
-  - Kaggle: Framingham, Heart Failure, Cardiovascular Disease
+  - 📌 UCI: Cleveland, Statlog, Hungarian, Long Beach VA
+  - 📌 Kaggle: Framingham, Heart Failure, Cardiovascular Disease
 
 - **Ensure:**
-  - Common clinical features such as age, cholesterol, chest pain, blood pressure
-  - Harmonized column names for unified analysis
+  - ✅ Common clinical features: age, cholesterol, chest pain, blood pressure
+  - ✅ Harmonized column names across datasets
 
-**1.2 Preprocessing**
-
-- Handle missing values:
-  - KNN Imputer for numerical features
-  - Mode or correlation-based imputation for categorical features
-- Detect and remove outliers:
-  - Isolation Forest or Z-score method
-- Normalize features:
-  - MinMaxScaler or RobustScaler
-
----
-
-### Step 2: Ensemble Feature Selection (EFS)
-
-**2.1 Apply Multiple Feature Selection Techniques**
-
-- **Filter Methods:** Information Gain, Chi-Square, Fisher Score  
-- **Embedded Methods:** LASSO, Random Forest Feature Importance  
-- **Wrapper Methods:** Recursive Feature Elimination (RFE)
-
-**2.2 Ensemble the Feature Ranks**
-
-- Normalize feature importance scores to a 0–1 scale  
-- Combine using mean rank aggregation or majority voting  
-- Experiment with top-k feature subsets (e.g., top 5, 7, 10)
+#### 1.2 Preprocessing
+- 🧹 Handle missing values:
+  - 🔢 KNN Imputer for numerical features
+  - 🔠 Mode or correlation-based imputation for categorical features
+- 🧪 Detect and remove outliers:
+  - 🌲 Isolation Forest or 📉 Z-score method
+- 📏 Normalize features:
+  - ⚖️ MinMaxScaler or RobustScaler
 
 ---
 
-### Step 3: Handle Class Imbalance
+### 🧠 Step 2: Ensemble Feature Selection (EFS)
 
-**3.1 Analyze Class Distribution**
+#### 2.1 Apply Multiple Feature Selection Techniques
+- 🔍 Filter Methods: Information Gain, Chi-Square, Fisher Score  
+- 🧱 Embedded Methods: LASSO, Random Forest Feature Importance  
+- 🧪 Wrapper Methods: Recursive Feature Elimination (RFE)
 
-- Calculate the class imbalance ratio
-
-**3.2 Apply Adaptive Sampling**
-
-- If imbalance ratio < 1:3 → Use SMOTE + Tomek Links  
-- If severe imbalance → Use ADASYN  
-- Apply sampling inside cross-validation folds to prevent data leakage
-
----
-
-### Step 4: Model Design
-
-**4.1 Base Classifiers**
-
-- Random Forest  
-- XGBoost  
-- LightGBM  
-- Logistic Regression
-
-**4.2 Genetic Algorithm for Hyperparameter Optimization**
-
-- Use GA to optimize model parameters  
-- **Fitness Function:** F1-score or AUC on validation set  
-- **Genetic Operations:**
-  - Selection: Tournament Selection
-  - Crossover: Uniform or One-point Crossover
-  - Mutation: Random Bit Flip or Gaussian Noise
-- Perform k-fold cross-validation in each generation
+#### 2.2 Ensemble the Feature Ranks
+- 🔄 Normalize scores (0–1 scale)  
+- 🗳️ Combine via mean rank aggregation or majority voting  
+- 🎯 Select top-k features (experiment with 5, 7, 10)
 
 ---
 
-### Step 5: Ensemble Learning
+### ⚖️ Step 3: Handle Class Imbalance
 
-**5.1 Build Final Ensemble**
+#### 3.1 Analyze Class Distribution
+- 📊 Calculate class imbalance ratio
 
-- Use Soft Voting or Stacking  
-- For Stacking: use Logistic Regression as meta-learner  
-- Compare ensemble performance vs. individual base models
-
----
-
-### Step 6: Evaluation Metrics
-
-**6.1 Model Performance**
-
-- Accuracy  
-- Precision  
-- Recall (Sensitivity)  
-- Specificity  
-- F1-Score  
-- ROC-AUC  
-- PR-AUC (critical for imbalanced data)
-
-**6.2 Robustness Testing**
-
-- Inject Gaussian noise to simulate sensor/data collection noise  
-- Use SHAP to test feature importance stability
+#### 3.2 Apply Adaptive Sampling
+- ➕ If imbalance ratio < 1:3 → Use SMOTE + Tomek Links  
+- 🚨 If severe imbalance → Use ADASYN  
+- 🧬 Embed sampling within CV folds to avoid data leakage
 
 ---
 
-### Step 7: Explainability Analysis
+### 🤖 Step 4: Model Design
 
-**7.1 SHAP Analysis**
+#### 4.1 Base Classifiers
+- 🌲 Random Forest  
+- ⚡ XGBoost  
+- 💡 LightGBM  
+- ➕ Logistic Regression
 
-- **Global:** Determine overall feature importance  
-- **Local (Instance-level):** Explain why a specific patient was classified as high-risk
+#### 4.2 Genetic Algorithm for Hyperparameter Optimization
+- 🎯 Optimize model parameters using GA  
+- 🧮 Fitness Function: F1-score or AUC  
+- 🔧 Genetic Operations:
+  - 🎲 Selection: Tournament
+  - 🔀 Crossover: Uniform or One-point
+  - 🎯 Mutation: Random Bit Flip or Gaussian Noise
+- 🔁 Use k-fold cross-validation for each generation
 
 ---
 
-### Step 8: Cross-Dataset Generalization (Optional)
+### 🧩 Step 5: Ensemble Learning
 
-- Train on one dataset (e.g., UCI)
-- Test on a different dataset (e.g., Kaggle or holdout portion of the unified dataset)
-- Evaluate the model’s generalization and transferability across sources
+#### 5.1 Build Final Ensemble
+- 🔗 Soft Voting or Stacking  
+- 🧠 Meta-model: Logistic Regression (for stacking)  
+- 🔍 Compare ensemble vs individual classifiers
+
+---
+
+### 📈 Step 6: Evaluation Metrics
+
+#### 6.1 Model Performance
+- ✅ Accuracy  
+- ✅ Precision  
+- ✅ Recall (Sensitivity)  
+- ✅ Specificity  
+- ✅ F1-Score  
+- ✅ ROC-AUC  
+- ✅ PR-AUC (important for imbalance)
+
+#### 6.2 Robustness Testing
+- 🎛️ Inject Gaussian noise to simulate data collection errors  
+- 🧠 Use SHAP for feature importance stability testing
+
+---
+
+### 🔍 Step 7: Explainability Analysis
+
+#### 7.1 SHAP Analysis
+- 🌐 Global feature importance view  
+- 🧾 Instance-level prediction explanation
+
+---
+
+### 🔁 Step 8: Cross-Dataset Generalization (Optional)
+- 🏋️ Train on Dataset A (e.g., UCI)
+- 🧪 Test on Dataset B (e.g., Kaggle or holdout)
+- 📊 Evaluate generalization and model transferability
+
+---
